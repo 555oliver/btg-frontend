@@ -1,0 +1,111 @@
+<div class="container mt-3">
+  <div class="section-btn">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      + Crear Apertura
+    </button>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form [formGroup]="form" (ngSubmit)="createFund(form.value)">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Crear Apertura
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+
+              <div class="mb-3">
+                <label for="exampleMontoInicial" class="form-label"
+                  >Fondos</label
+                >
+                <select
+                  class="form-select"
+                  id="inputGroupSelect02"
+                  formControlName="fondo"
+                >
+                  <option value="1">Seleccionar Fondo...</option>
+                  <option *ngFor="let fund of funds" [value]="fund._id">
+                    {{ fund.nombre_fondo | uppercase }} -
+                    {{ fund.monto_minimo | currency }}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="exampleMontoInicial" class="form-label"
+                  >Monto Inicial</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="exampleMontoInicial"
+                  formControlName="saldo"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary">Crear</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<h1 class="text-center">Aperturas</h1>
+<div class="container mt-4">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre Fondo</th>
+            <th scope="col">Saldo Inicial</th>
+            <th scope="col">Fecha Creación</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Cancelar Apertura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions">
+            <th scope="row">{{ transaction._id }}</th>
+            <td>{{ transaction.fondo.nombre_fondo | uppercase }}</td>
+            <td>{{ transaction.saldo | currency }}</td>
+            <td>{{ transaction.fecha_creacion  | date: 'short'}}</td>
+            <td>
+              <span class="badge text-bg-success">{{
+                transaction.tipo_accion
+              }}</span>
+            </td>
+            <td class="text-center">
+                <i type="button" (click)="cencellationTransaction(transaction._id)" class="fa-solid fa-ban icon"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

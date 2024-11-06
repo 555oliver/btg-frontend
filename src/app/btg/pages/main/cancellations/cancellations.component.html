@@ -1,0 +1,29 @@
+<div class="container mt-3">
+    <h1 class="text-center">Cancelaciones</h1>
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre Fondo</th>
+                <th scope="col">Saldo Inicial</th>
+                <th scope="col">Fecha Creación</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of transactions">
+                <th scope="row">{{ transaction._id }}</th>
+                <td>{{ transaction.fondo.nombre_fondo | uppercase }}</td>
+                <td>{{ transaction.saldo | currency }}</td>
+                <td>{{ transaction.fecha_creacion  | date: 'short'}}</td>
+                <td>
+                  <span class="badge text-bg-danger">{{
+                    transaction.tipo_accion
+                  }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h1 class="text-center">Fondos Registrados</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre Fondo</th>
+          <th scope="col">Monto Minimo</th>
+          <th scope="col">Categoria Fondo</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fund of funds">
+          <th scope="row">{{fund._id}}</th>
+          <td>{{fund.nombre_fondo | uppercase}}</td>
+          <td>{{fund.monto_minimo | currency}}</td>
+          <td>{{fund.categoria_fondo}}</td>
+          <td><span class="badge text-bg-success">{{fund.estado}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
